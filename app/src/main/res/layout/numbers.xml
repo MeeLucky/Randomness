@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/min"
+        style="@style/secondDefaultText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="80dp"
+        android:text="min:"/>
+
+    <EditText
+        android:id="@+id/minET"
+        style="@style/secondDefaultText"
+        app:layout_constraintTop_toTopOf="@id/min"
+        app:layout_constraintLeft_toRightOf="@id/min"
+        android:inputType="number"
+        android:layout_width="350dp"
+        android:text="0"/>
+
+    <TextView
+        android:id="@+id/max"
+        style="@style/secondDefaultText"
+        app:layout_constraintTop_toBottomOf="@id/min"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="80dp"
+        android:text="max:"/>
+
+    <EditText
+        android:id="@+id/maxET"
+        style="@style/secondDefaultText"
+        app:layout_constraintTop_toTopOf="@id/max"
+        app:layout_constraintLeft_toRightOf="@id/max"
+        android:inputType="number"
+        android:layout_width="350dp"
+        android:text="100"/>
+
+    <Button
+        android:id="@+id/getButton"
+        style="@style/secondDefaultButton"
+        app:layout_constraintTop_toBottomOf="@id/maxET"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"
+        android:text="Получить число"
+        android:onClick="getNumber"/>
+
+    <TextView
+        android:id="@+id/result"
+        style="@style/secondDefaultText"
+        app:layout_constraintTop_toBottomOf="@+id/getButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,13 +3,17 @@ package com.example.randomness;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Objects;
-import java.util.zip.Inflater;
 
 public class SecondaryActivity extends AppCompatActivity {
 
@@ -51,6 +55,26 @@ public class SecondaryActivity extends AppCompatActivity {
 
         inflater.inflate(resource, root);
     }
+
+    public void getNumber(View view) {
+        TextView result = findViewById(R.id.result);
+
+        int min = Integer.parseInt(((EditText)findViewById(R.id.minET)).getText().toString());
+        int max = Integer.parseInt(((EditText)findViewById(R.id.maxET)).getText().toString());
+
+        result.setText(String.valueOf(Randomness.getRandom(min, max)));
+    }
+
+    public void getCoin(View view) {
+        ImageView result = findViewById(R.id.result);
+
+        result.setImageBitmap(Randomness.getRandom(0, 1) == 1
+                ?
+                ((BitmapDrawable) getDrawable(R.drawable.coin1)).getBitmap()
+                :
+                ((BitmapDrawable) getDrawable(R.drawable.coin2)).getBitmap());
+    }
+
 
 
 }

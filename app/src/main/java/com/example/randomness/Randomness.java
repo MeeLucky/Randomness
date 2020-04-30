@@ -5,7 +5,7 @@ import java.util.Random;
 public class Randomness {
     private static Random rand = new Random();
 
-    static int GetRandom(int min, int max) {
+    static int getRandom(int min, int max) {
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
         }
