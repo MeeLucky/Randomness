@@ -37,7 +37,10 @@
     </style>
 
     <style name="secondDefaultButton" parent="secondDefaultText">
-
+        <item name="android:textColor">@color/colorPrimaryTextLight</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingLeft">15dp</item>
     </style>
 <!--        <item name=""></item>-->
 </resources>

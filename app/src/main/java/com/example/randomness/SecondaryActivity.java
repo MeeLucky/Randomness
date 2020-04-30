@@ -3,11 +3,15 @@ package com.example.randomness;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -58,6 +62,10 @@ public class SecondaryActivity extends AppCompatActivity {
 
     public void getNumber(View view) {
         TextView result = findViewById(R.id.result);
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(((Button)view).getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
 
         int min = Integer.parseInt(((EditText)findViewById(R.id.minET)).getText().toString());
         int max = Integer.parseInt(((EditText)findViewById(R.id.maxET)).getText().toString());
