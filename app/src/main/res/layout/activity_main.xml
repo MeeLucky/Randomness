@@ -10,21 +10,142 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="ScrollViewCount">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--item number-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:onClick="nothing">
+                style="@style/mainItemLL"
+                android:tag="numbers"
+                android:onClick="menuClick">
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    />
+                    style="@style/mainItemImage"
+                    android:src="@drawable/number"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/mainItemTextView"
+                    android:layout_gravity="center"
+                    android:text="@string/numbers"/>
             </LinearLayout>
+
+            <!--item coin -->
+            <LinearLayout
+                style="@style/mainItemLL"
+                android:tag="coin"
+                android:onClick="menuClick">
+                <ImageView
+                    style="@style/mainItemImage"
+                    android:src="@drawable/number"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/mainItemTextView"
+                    android:layout_gravity="center"
+                    android:text="@string/coin"/>
+            </LinearLayout>
+
+            <!--item cube-->
+            <LinearLayout
+                style="@style/mainItemLL"
+                android:tag="cube"
+                android:onClick="menuClick">
+                <ImageView
+                    style="@style/mainItemImage"
+                    android:src="@drawable/number"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/mainItemTextView"
+                    android:layout_gravity="center"
+                    android:text="@string/cube"/>
+            </LinearLayout>
+
+            <!--item password-->
+            <LinearLayout
+                style="@style/mainItemLL"
+                android:tag="passwords"
+                android:onClick="menuClick">
+                <ImageView
+                    style="@style/mainItemImage"
+                    android:src="@drawable/number"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/mainItemTextView"
+                    android:layout_gravity="center"
+                    android:text="@string/passwords"/>
+            </LinearLayout>
+
+            <!--item roshambo-->
+            <LinearLayout
+                style="@style/mainItemLL"
+                android:tag="roshambo"
+                android:onClick="menuClick">
+                <ImageView
+                    style="@style/mainItemImage"
+                    android:src="@drawable/number"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/mainItemTextView"
+                    android:layout_gravity="center"
+                    android:text="@string/roshambo"/>
+            </LinearLayout>
+
+            <!--item colors-->
+            <LinearLayout
+                style="@style/mainItemLL"
+                android:tag="colors"
+                android:onClick="menuClick">
+                <ImageView
+                    style="@style/mainItemImage"
+                    android:src="@drawable/number"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/mainItemTextView"
+                    android:layout_gravity="center"
+                    android:text="@string/colors"/>
+            </LinearLayout>
+
+            <!--item letters-->
+            <LinearLayout
+                style="@style/mainItemLL"
+                android:tag="letters"
+                android:onClick="menuClick">
+                <ImageView
+                    style="@style/mainItemImage"
+                    android:src="@drawable/number"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/mainItemTextView"
+                    android:layout_gravity="center"
+                    android:text="@string/letters"/>
+            </LinearLayout>
+
+<!--            &lt;!&ndash;item &ndash;&gt;-->
+<!--            <LinearLayout-->
+<!--                style="@style/mainItemLL"-->
+<!--                android:tag="number"-->
+<!--                android:onClick="nothing">-->
+<!--                <ImageView-->
+<!--                    style="@style/mainItemImage"-->
+<!--                    android:src="@drawable/number"-->
+<!--                    tools:ignore="ContentDescription" />-->
+
+<!--                <TextView-->
+<!--                    style="@style/mainItemTextView"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="число"/>-->
+<!--            </LinearLayout>-->
+
         </LinearLayout>
-    </ScrollView>
+
+</ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

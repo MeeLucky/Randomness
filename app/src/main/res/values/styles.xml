@@ -8,4 +8,23 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="mainItemLL">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="mainItemImage">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">100dp</item>
+    </style>
+
+    <style name="mainItemTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+<!--        <item name=""></item>-->
 </resources>
