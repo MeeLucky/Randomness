@@ -39,7 +39,7 @@
                 android:onClick="menuClick">
                 <ImageView
                     style="@style/mainItemImage"
-                    android:src="@drawable/number"
+                    android:src="@drawable/coin"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -55,7 +55,7 @@
                 android:onClick="menuClick">
                 <ImageView
                     style="@style/mainItemImage"
-                    android:src="@drawable/number"
+                    android:src="@drawable/cube2"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -71,7 +71,8 @@
                 android:onClick="menuClick">
                 <ImageView
                     style="@style/mainItemImage"
-                    android:src="@drawable/number"
+                    android:padding="10dp"
+                    android:src="@drawable/passwrod"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -87,7 +88,8 @@
                 android:onClick="menuClick">
                 <ImageView
                     style="@style/mainItemImage"
-                    android:src="@drawable/number"
+                    android:src="@drawable/paper"
+                    android:padding="10dp"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -103,7 +105,7 @@
                 android:onClick="menuClick">
                 <ImageView
                     style="@style/mainItemImage"
-                    android:src="@drawable/number"
+                    android:src="@drawable/color"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -119,7 +121,7 @@
                 android:onClick="menuClick">
                 <ImageView
                     style="@style/mainItemImage"
-                    android:src="@drawable/number"
+                    android:src="@drawable/letters"
                     tools:ignore="ContentDescription" />
 
                 <TextView
