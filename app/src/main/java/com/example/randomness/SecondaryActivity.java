@@ -4,12 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -48,6 +48,7 @@ public class SecondaryActivity extends AppCompatActivity {
             case "cube":
                 break;
             case "colors":
+                resource = R.layout.colors;
                 break;
             case "letters":
                 break;
@@ -77,7 +78,7 @@ public class SecondaryActivity extends AppCompatActivity {
 
                     // Получаем выбранный объект
                     String item = (String)parent.getItemAtPosition(position);
-                    pasLen = Integer.parseInt(item);
+                    passwordLen = Integer.parseInt(item);
                 }
 
                 @Override
@@ -112,7 +113,7 @@ public class SecondaryActivity extends AppCompatActivity {
                 ((BitmapDrawable) getDrawable(R.drawable.coin2)).getBitmap());
     }
 
-    int pasLen = 6;
+    int passwordLen = 6;
     public void getPassword(View view) {
         boolean[] settings = {
                 ((CheckBox)findViewById(R.id.checkbox1)).isChecked(),//заглавные
@@ -121,7 +122,25 @@ public class SecondaryActivity extends AppCompatActivity {
                 ((CheckBox)findViewById(R.id.checkbox4)).isChecked()//цифры
         };
 
-        ((TextView)findViewById(R.id.result)).setText(Randomness.getPassword(pasLen, settings));
+        ((TextView)findViewById(R.id.result)).setText(Randomness.getPassword(passwordLen, settings));
+    }
+
+    public void getColor(View view) {
+        ConstraintLayout colorRoot = findViewById(R.id.colorRoot);
+        TextView colorCode = findViewById(R.id.colorCode);
+
+        int r = Randomness.getRandom(0, 255);
+        int g = Randomness.getRandom(0, 255);
+        int b = Randomness.getRandom(0, 255);
+
+        int color = Color.rgb(r, g, b);
+        int contrast = Color.rgb(255 - r, 255 - g, 255 - b);
+
+        colorRoot.setBackgroundColor(color);
+
+        String code = "#" + Integer.toHexString(color).substring(2, 8).toUpperCase();
+        colorCode.setText(code);
+        colorCode.setTextColor(contrast);
     }
 
 }
