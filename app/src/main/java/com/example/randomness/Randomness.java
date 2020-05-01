@@ -61,4 +61,15 @@ public class Randomness {
 
         return str.toString();
     }
+
+    public static String getLetter(String lang) {
+        switch (lang) {
+            case "English":
+                return String.valueOf((char)getRandom(65, 90));
+            case "Русский":
+                return String.valueOf((char)getRandom(1040, 1071));
+            default:
+                return "error";
+        }
+    }
 }

@@ -51,6 +51,7 @@ public class SecondaryActivity extends AppCompatActivity {
                 resource = R.layout.colors;
                 break;
             case "letters":
+                resource = R.layout.letters;
                 break;
             case "passwords":
                 resource = R.layout.passwords;
@@ -71,7 +72,6 @@ public class SecondaryActivity extends AppCompatActivity {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
 
-
             AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -82,9 +82,26 @@ public class SecondaryActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onNothingSelected(AdapterView<?> parent) {
+                public void onNothingSelected(AdapterView<?> parent) { }
+            };
+            spinner.setOnItemSelectedListener(itemSelectedListener);
+        }
 
+        if(key.equals("letters")) {
+            Spinner spinner = findViewById(R.id.langSpinner);
+            String[] language = {"English", "Русский"};
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, language);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+
+            AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    lang = (String)parent.getItemAtPosition(position);
                 }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) { }
             };
             spinner.setOnItemSelectedListener(itemSelectedListener);
         }
@@ -141,6 +158,11 @@ public class SecondaryActivity extends AppCompatActivity {
         String code = "#" + Integer.toHexString(color).substring(2, 8).toUpperCase();
         colorCode.setText(code);
         colorCode.setTextColor(contrast);
+    }
+
+    String lang = "English";
+    public void getLetter(View view) {
+        ((TextView)findViewById(R.id.result)).setText(Randomness.getLetter(lang));
     }
 
 }
