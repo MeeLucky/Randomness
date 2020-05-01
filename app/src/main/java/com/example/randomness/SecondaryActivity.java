@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -44,8 +45,10 @@ public class SecondaryActivity extends AppCompatActivity {
                 resource = R.layout.coin;
                 break;
             case "roshambo":
+                resource = R.layout.roshambo;
                 break;
             case "cube":
+                resource = R.layout.cube;
                 break;
             case "colors":
                 resource = R.layout.colors;
@@ -165,4 +168,26 @@ public class SecondaryActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.result)).setText(Randomness.getLetter(lang));
     }
 
+    public void getRoshambo(View view) {
+        ImageView result = findViewById(R.id.result);
+
+        Bitmap bitmap;
+
+        switch (Randomness.getRandom(1,3)) {
+            case 1:
+                bitmap = ((BitmapDrawable) getDrawable(R.drawable.rock)).getBitmap();
+                break;
+            case 2:
+                bitmap = ((BitmapDrawable) getDrawable(R.drawable.scissors)).getBitmap();
+                break;
+            case 3:
+                bitmap = ((BitmapDrawable) getDrawable(R.drawable.paper)).getBitmap();
+                break;
+            default:
+                Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
+                return;
+        }
+
+        result.setImageBitmap(bitmap);
+    }
 }
