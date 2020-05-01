@@ -11,9 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +29,6 @@ public class SecondaryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secondary);
-
 
         LayoutInflater inflater = getLayoutInflater();
         ConstraintLayout root = findViewById(R.id.root);
@@ -49,6 +52,7 @@ public class SecondaryActivity extends AppCompatActivity {
             case "letters":
                 break;
             case "passwords":
+                resource = R.layout.passwords;
                 break;
 
             default:
@@ -58,6 +62,31 @@ public class SecondaryActivity extends AppCompatActivity {
         }
 
         inflater.inflate(resource, root);
+
+        if(key.equals("passwords")) {
+            Spinner spinner = findViewById(R.id.lenSpinner);
+            String[] length = {"6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"};
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, length);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+
+
+            AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    // Получаем выбранный объект
+                    String item = (String)parent.getItemAtPosition(position);
+                    pasLen = Integer.parseInt(item);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            };
+            spinner.setOnItemSelectedListener(itemSelectedListener);
+        }
     }
 
     public void getNumber(View view) {
@@ -83,6 +112,16 @@ public class SecondaryActivity extends AppCompatActivity {
                 ((BitmapDrawable) getDrawable(R.drawable.coin2)).getBitmap());
     }
 
+    int pasLen = 6;
+    public void getPassword(View view) {
+        boolean[] settings = {
+                ((CheckBox)findViewById(R.id.checkbox1)).isChecked(),//заглавные
+                ((CheckBox)findViewById(R.id.checkbox2)).isChecked(),//прописные
+                ((CheckBox)findViewById(R.id.checkbox3)).isChecked(),//спец.
+                ((CheckBox)findViewById(R.id.checkbox4)).isChecked()//цифры
+        };
 
+        ((TextView)findViewById(R.id.result)).setText(Randomness.getPassword(pasLen, settings));
+    }
 
 }

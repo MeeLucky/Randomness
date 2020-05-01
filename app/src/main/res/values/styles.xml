@@ -42,5 +42,10 @@
         <item name="android:paddingRight">15dp</item>
         <item name="android:paddingLeft">15dp</item>
     </style>
+
+    <style name="secondDefaultCheckbox" parent="secondDefaultButton">
+        <item name="android:textSize">20sp</item>
+
+    </style>
 <!--        <item name=""></item>-->
 </resources>
