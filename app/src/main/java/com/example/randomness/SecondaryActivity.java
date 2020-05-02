@@ -122,6 +122,24 @@ public class SecondaryActivity extends AppCompatActivity {
         }
     }
 
+    private void Animation(View view, String animName) {
+        switch (animName) {
+            case "flip":
+                view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.up_down_flip));
+                break;
+            case "zoom":
+                view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.zoom));
+                break;
+            case "coinFlip":
+                view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.coin_flip));
+                break;
+            default:
+                Log.e("SECONDARY. ERROR", "wrong animation: " + animName);
+                return;
+        }
+
+    }
+
     public void getNumber(View view) {
         TextView result = findViewById(R.id.result);
 
@@ -133,6 +151,8 @@ public class SecondaryActivity extends AppCompatActivity {
         int max = Integer.parseInt(((EditText)findViewById(R.id.maxET)).getText().toString());
 
         result.setText(String.valueOf(Randomness.getRandom(min, max)));
+
+        Animation(result, "flip");
     }
 
     public void getCoin(View view) {
@@ -143,6 +163,8 @@ public class SecondaryActivity extends AppCompatActivity {
                 ((BitmapDrawable) getDrawable(R.drawable.coin1)).getBitmap()
                 :
                 ((BitmapDrawable) getDrawable(R.drawable.coin2)).getBitmap());
+
+        Animation(result, "coinFlip");
     }
 
     int passwordLen = 6;
@@ -154,7 +176,10 @@ public class SecondaryActivity extends AppCompatActivity {
                 ((CheckBox)findViewById(R.id.checkbox4)).isChecked()//цифры
         };
 
-        ((TextView)findViewById(R.id.result)).setText(Randomness.getPassword(passwordLen, settings));
+        TextView result = findViewById(R.id.result);
+        result.setText(Randomness.getPassword(passwordLen, settings));
+
+        Animation(result, "flip");
     }
 
     public void getColor(View view) {
@@ -177,7 +202,11 @@ public class SecondaryActivity extends AppCompatActivity {
 
     String lang = "English";
     public void getLetter(View view) {
-        ((TextView)findViewById(R.id.result)).setText(Randomness.getLetter(lang));
+        TextView result = findViewById(R.id.result);
+
+        result.setText(Randomness.getLetter(lang));
+
+        Animation(result, "flip");
     }
 
     public void getRoshambo(View view) {
@@ -201,6 +230,7 @@ public class SecondaryActivity extends AppCompatActivity {
         }
 
         result.setImageBitmap(bitmap);
+        Animation(result, "zoom");
     }
 
     LevelListDrawable dices = new LevelListDrawable();
@@ -212,5 +242,7 @@ public class SecondaryActivity extends AppCompatActivity {
 
         dices.setLevel(Randomness.getRandom(1, 6));
         result.setImageDrawable(dices.getCurrent());
+
+        Animation(result, "zoom");
     }
 }
