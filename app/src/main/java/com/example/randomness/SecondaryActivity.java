@@ -72,6 +72,9 @@ public class SecondaryActivity extends AppCompatActivity {
 
         inflater.inflate(resource, root);
 
+        //это после инфлетера, ведь он ищет по ид в ресурсе
+        //спиннер длинны
+
         if(key.equals("passwords")) {
             Spinner spinner = findViewById(R.id.lenSpinner);
             String[] length = {"6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"};
@@ -94,6 +97,7 @@ public class SecondaryActivity extends AppCompatActivity {
             spinner.setOnItemSelectedListener(itemSelectedListener);
         }
 
+        //спиннер языков
         if(key.equals("letters")) {
             Spinner spinner = findViewById(R.id.langSpinner);
             String[] language = {"English", "Русский"};
@@ -200,7 +204,6 @@ public class SecondaryActivity extends AppCompatActivity {
     }
 
     LevelListDrawable dices = new LevelListDrawable();
-    boolean firstCube = true;
     public void getCube(View view) {
         ImageView result = findViewById(R.id.result);
 
