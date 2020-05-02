@@ -7,4 +7,5 @@
     <string name="colors">Цвета</string>
     <string name="letters">Буквы</string>
     <string name="passwords">Пароли</string>
+    <string name="clickForCopy">нажмите, чтобы скопировать</string>
 </resources>

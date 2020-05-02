@@ -5,6 +5,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -25,6 +27,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.Objects;
 
@@ -130,7 +134,7 @@ public class SecondaryActivity extends AppCompatActivity {
         }
     }
 
-    private void Animation(View view, String animName) {
+    private void animation(View view, String animName) {
         switch (animName) {
             case "flip":
                 view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.up_down_flip));
@@ -146,6 +150,23 @@ public class SecondaryActivity extends AppCompatActivity {
                 return;
         }
 
+    }
+
+    boolean CopyTipIsVisible = false;
+    public void clipBoard(View view) {
+        ClipboardManager clipboard = (ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("", ((TextView)view).getText().toString());
+        Objects.requireNonNull(clipboard).setPrimaryClip(clip);
+        Toast.makeText(this,"Скопированно в бфер обмена", Toast.LENGTH_SHORT).show();
+    }
+
+    private void makeTipVisible() {
+        if(!CopyTipIsVisible) {
+            CopyTipIsVisible = true;
+            TextView tip = findViewById(R.id.copyTip);
+            tip.setVisibility(View.VISIBLE);
+            tip.startAnimation(AnimationUtils.loadAnimation(this, R.anim.tip_slide));
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -194,7 +215,9 @@ public class SecondaryActivity extends AppCompatActivity {
 
         result.setText(String.valueOf(Randomness.getRandom(min, max)));
 
-        Animation(result, "flip");
+        animation(result, "flip");
+
+        makeTipVisible();
     }
 
     public void getCoin(View view) {
@@ -206,7 +229,7 @@ public class SecondaryActivity extends AppCompatActivity {
                 :
                 ((BitmapDrawable) getDrawable(R.drawable.coin2)).getBitmap());
 
-        Animation(result, "coinFlip");
+        animation(result, "coinFlip");
     }
 
     //Todo: копировать password при нажатии
@@ -222,7 +245,9 @@ public class SecondaryActivity extends AppCompatActivity {
         TextView result = findViewById(R.id.result);
         result.setText(Randomness.getPassword(passwordLen, settings));
 
-        Animation(result, "flip");
+        animation(result, "flip");
+
+        makeTipVisible();
     }
 
     //Todo: копировать color при нажатии
@@ -242,6 +267,8 @@ public class SecondaryActivity extends AppCompatActivity {
         String code = "#" + Integer.toHexString(color).substring(2, 8).toUpperCase();
         colorCode.setText(code);
         colorCode.setTextColor(contrast);
+
+        makeTipVisible();
     }
 
     //Todo: история букв
@@ -251,7 +278,9 @@ public class SecondaryActivity extends AppCompatActivity {
 
         result.setText(Randomness.getLetter(lang));
 
-        Animation(result, "flip");
+        animation(result, "flip");
+
+        makeTipVisible();
     }
 
     public void getRoshambo(View view) {
@@ -275,7 +304,7 @@ public class SecondaryActivity extends AppCompatActivity {
         }
 
         result.setImageBitmap(bitmap);
-        Animation(result, "zoom");
+        animation(result, "zoom");
     }
 
     LevelListDrawable dices = new LevelListDrawable();
@@ -288,6 +317,6 @@ public class SecondaryActivity extends AppCompatActivity {
         dices.setLevel(Randomness.getRandom(1, 6));
         result.setImageDrawable(dices.getCurrent());
 
-        Animation(result, "zoom");
+        animation(result, "zoom");
     }
 }
