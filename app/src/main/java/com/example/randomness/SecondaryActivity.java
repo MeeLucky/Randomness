@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -147,16 +148,49 @@ public class SecondaryActivity extends AppCompatActivity {
 
     }
 
-    //Todo: add try catch
+    @SuppressLint("SetTextI18n")
     public void getNumber(View view) {
-        TextView result = findViewById(R.id.result);
-
+        //hide keyboard
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(((Button)view).getWindowToken(),
+        Objects.requireNonNull(imm).hideSoftInputFromWindow(((Button)view).getWindowToken(),
                 InputMethodManager.HIDE_NOT_ALWAYS);
 
-        int min = Integer.parseInt(((EditText)findViewById(R.id.minET)).getText().toString());
-        int max = Integer.parseInt(((EditText)findViewById(R.id.maxET)).getText().toString());
+        TextView result = findViewById(R.id.result);
+        EditText minET = findViewById(R.id.minET);
+        EditText maxET = findViewById(R.id.maxET);
+
+        int min = 0;
+        int max = 100;
+
+        String minStr = minET.getText().toString();
+        String maxStr = maxET.getText().toString();
+
+        try {
+            min = Integer.parseInt(minStr);
+            max = Integer.parseInt(maxStr);
+        } catch(Exception ex) {
+            min = 0;
+            if(minStr.equals("") && maxStr.equals("")) {
+                minET.setText("0");
+                maxET.setText("100");
+                Toast.makeText(this, "Поля не должны быть пустыми", Toast.LENGTH_SHORT).show();
+            } else {
+                if (minStr.equals("")) {
+                    minET.setText("0");
+                    Toast.makeText(this, "Поле 'min' не должно быть пустым", Toast.LENGTH_SHORT).show();
+                }
+                if (maxStr.equals("")) {
+                    maxET.setText("100");
+                    Toast.makeText(this, "Поле 'max' не должно быть пустым", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+        if(min > max) {
+            Toast.makeText(this, "Минимум не дожен быть больше максимума", Toast.LENGTH_SHORT).show();
+            minET.setText("0");
+            min = 0;
+        }
 
         result.setText(String.valueOf(Randomness.getRandom(min, max)));
 
