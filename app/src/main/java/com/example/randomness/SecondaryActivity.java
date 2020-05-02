@@ -2,15 +2,19 @@ package com.example.randomness;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.LevelListDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -108,6 +112,10 @@ public class SecondaryActivity extends AppCompatActivity {
             };
             spinner.setOnItemSelectedListener(itemSelectedListener);
         }
+
+        if(key.equals("cube")) {
+            dices.addLevel(0, 6, ResourcesCompat.getDrawable(getResources(), R.drawable.dices, null));
+        }
     }
 
     public void getNumber(View view) {
@@ -189,5 +197,17 @@ public class SecondaryActivity extends AppCompatActivity {
         }
 
         result.setImageBitmap(bitmap);
+    }
+
+    LevelListDrawable dices = new LevelListDrawable();
+    boolean firstCube = true;
+    public void getCube(View view) {
+        ImageView result = findViewById(R.id.result);
+
+        dices.setLevel(0);
+        result.setImageDrawable(dices.getCurrent());
+
+        dices.setLevel(Randomness.getRandom(1, 6));
+        result.setImageDrawable(dices.getCurrent());
     }
 }
