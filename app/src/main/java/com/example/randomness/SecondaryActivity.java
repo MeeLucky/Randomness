@@ -25,6 +25,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -232,7 +233,6 @@ public class SecondaryActivity extends AppCompatActivity {
         animation(result, "coinFlip");
     }
 
-    //Todo: копировать password при нажатии
     int passwordLen = 6;
     public void getPassword(View view) {
         boolean[] settings = {
@@ -250,7 +250,6 @@ public class SecondaryActivity extends AppCompatActivity {
         makeTipVisible();
     }
 
-    //Todo: копировать color при нажатии
     public void getColor(View view) {
         ConstraintLayout colorRoot = findViewById(R.id.colorRoot);
         TextView colorCode = findViewById(R.id.colorCode);
@@ -271,14 +270,20 @@ public class SecondaryActivity extends AppCompatActivity {
         makeTipVisible();
     }
 
-    //Todo: история букв
     String lang = "English";
     public void getLetter(View view) {
         TextView result = findViewById(R.id.result);
-
-        result.setText(Randomness.getLetter(lang));
-
+        String letter = Randomness.getLetter(lang);
+        result.setText(letter);
         animation(result, "flip");
+
+        TextView history = findViewById(R.id.history);
+        String str = history.getText().toString();
+        str += " " + letter;
+        history.setText(str);
+        if(history.getHeight() > 300) {
+            history.setText(str.substring(2));
+        }
 
         makeTipVisible();
     }

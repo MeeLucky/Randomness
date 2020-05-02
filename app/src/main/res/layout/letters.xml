@@ -26,10 +26,20 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/langTV"
-        app:layout_constraintBottom_toTopOf="@id/getLetter"
+        android:layout_marginTop="70dp"
         android:textSize="80sp"
         android:onClick="clipBoard"/>
 
+    <TextView
+        android:id="@+id/history"
+        style="@style/secondDefaultText"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/getLetter"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:gravity="center"
+        />
     <Button
         android:id="@+id/getLetter"
         style="@style/secondDefaultButton"
