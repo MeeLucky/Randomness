@@ -43,24 +43,31 @@ public class SecondaryActivity extends AppCompatActivity {
 
         switch (key) {
             case "numbers":
+                setTitle(R.string.numbers);
                 resource = R.layout.numbers;
                 break;
             case "coin":
+                setTitle(R.string.coin);
                 resource = R.layout.coin;
                 break;
             case "roshambo":
+                setTitle(R.string.roshambo);
                 resource = R.layout.roshambo;
                 break;
             case "cube":
+                setTitle(R.string.cube);
                 resource = R.layout.cube;
                 break;
             case "colors":
+                setTitle(R.string.colors);
                 resource = R.layout.colors;
                 break;
             case "letters":
+                setTitle(R.string.letters);
                 resource = R.layout.letters;
                 break;
             case "passwords":
+                setTitle(R.string.passwords);
                 resource = R.layout.passwords;
                 break;
 
@@ -74,7 +81,6 @@ public class SecondaryActivity extends AppCompatActivity {
 
         //это после инфлетера, ведь он ищет по ид в ресурсе
         //спиннер длинны
-
         if(key.equals("passwords")) {
             Spinner spinner = findViewById(R.id.lenSpinner);
             String[] length = {"6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"};
