@@ -26,7 +26,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/langTV"
-        app:layout_constraintBottom_toTopOf="@id/getLetter"/>
+        app:layout_constraintBottom_toTopOf="@id/getLetter"
+        android:textSize="80sp"/>
 
     <Button
         android:id="@+id/getLetter"

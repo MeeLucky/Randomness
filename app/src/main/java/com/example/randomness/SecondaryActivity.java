@@ -27,6 +27,8 @@ import android.widget.Toast;
 
 import java.util.Objects;
 
+//Todo: codeReview
+
 public class SecondaryActivity extends AppCompatActivity {
 
     @Override
@@ -145,6 +147,7 @@ public class SecondaryActivity extends AppCompatActivity {
 
     }
 
+    //Todo: add try catch
     public void getNumber(View view) {
         TextView result = findViewById(R.id.result);
 
@@ -172,6 +175,7 @@ public class SecondaryActivity extends AppCompatActivity {
         Animation(result, "coinFlip");
     }
 
+    //Todo: копировать password при нажатии
     int passwordLen = 6;
     public void getPassword(View view) {
         boolean[] settings = {
@@ -187,6 +191,7 @@ public class SecondaryActivity extends AppCompatActivity {
         Animation(result, "flip");
     }
 
+    //Todo: копировать color при нажатии
     public void getColor(View view) {
         ConstraintLayout colorRoot = findViewById(R.id.colorRoot);
         TextView colorCode = findViewById(R.id.colorCode);
@@ -205,6 +210,7 @@ public class SecondaryActivity extends AppCompatActivity {
         colorCode.setTextColor(contrast);
     }
 
+    //Todo: история букв
     String lang = "English";
     public void getLetter(View view) {
         TextView result = findViewById(R.id.result);
