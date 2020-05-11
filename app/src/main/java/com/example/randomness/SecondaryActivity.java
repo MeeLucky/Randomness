@@ -1,9 +1,5 @@
 package com.example.randomness;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.res.ResourcesCompat;
-
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -14,26 +10,23 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.LevelListDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.Objects;
-
-//Todo: codeReview
 
 public class SecondaryActivity extends AppCompatActivity {
 
@@ -42,12 +35,11 @@ public class SecondaryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secondary);
 
-        LayoutInflater inflater = getLayoutInflater();
-        ConstraintLayout root = findViewById(R.id.root);
 
         String key = Objects.requireNonNull(getIntent().getExtras()).getString("key");
         int resource = 0;
 
+        assert key != null;
         switch (key) {
             case "numbers":
                 setTitle(R.string.numbers);
@@ -84,22 +76,20 @@ public class SecondaryActivity extends AppCompatActivity {
                 break;
         }
 
-        inflater.inflate(resource, root);
+        getLayoutInflater().inflate(resource, (ConstraintLayout)findViewById(R.id.root));
 
         //это после инфлетера, ведь он ищет по ид в ресурсе
-        //спиннер длинны
+        //подготовка спиннера длинны пароля
         if(key.equals("passwords")) {
             Spinner spinner = findViewById(R.id.lenSpinner);
-            String[] length = {"6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"};
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, length);
+            String[] length = {"6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, length);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
 
             AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                    // Получаем выбранный объект
                     String item = (String)parent.getItemAtPosition(position);
                     passwordLen = Integer.parseInt(item);
                 }
@@ -110,11 +100,11 @@ public class SecondaryActivity extends AppCompatActivity {
             spinner.setOnItemSelectedListener(itemSelectedListener);
         }
 
-        //спиннер языков
+        //подготовка спиннера выбора языков
         if(key.equals("letters")) {
             Spinner spinner = findViewById(R.id.langSpinner);
             String[] language = {"English", "Русский"};
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, language);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, language);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
 
@@ -130,8 +120,13 @@ public class SecondaryActivity extends AppCompatActivity {
             spinner.setOnItemSelectedListener(itemSelectedListener);
         }
 
+        //эканомия миллисекунды...
         if(key.equals("cube")) {
-            dices.addLevel(0, 6, ResourcesCompat.getDrawable(getResources(), R.drawable.dices, null));
+            dices.addLevel(
+                    0,
+                    6,
+                    ResourcesCompat.getDrawable(getResources(), R.drawable.dices, null)
+            );
         }
     }
 
@@ -147,10 +142,8 @@ public class SecondaryActivity extends AppCompatActivity {
                 view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.coin_flip));
                 break;
             default:
-                Log.e("SECONDARY. ERROR", "wrong animation: " + animName);
-                return;
+                Log.e("SECONDARY ACTIVITY", "wrong animation: " + animName);
         }
-
     }
 
     boolean CopyTipIsVisible = false;
@@ -174,14 +167,17 @@ public class SecondaryActivity extends AppCompatActivity {
     public void getNumber(View view) {
         //hide keyboard
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        Objects.requireNonNull(imm).hideSoftInputFromWindow(((Button)view).getWindowToken(),
-                InputMethodManager.HIDE_NOT_ALWAYS);
+        assert imm != null;
+        imm.hideSoftInputFromWindow(
+                view.getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS
+        );
 
         TextView result = findViewById(R.id.result);
         EditText minET = findViewById(R.id.minET);
         EditText maxET = findViewById(R.id.maxET);
 
-        int min = 0;
+        int min;
         int max = 100;
 
         String minStr = minET.getText().toString();
@@ -226,9 +222,9 @@ public class SecondaryActivity extends AppCompatActivity {
 
         result.setImageBitmap(Randomness.getRandom(0, 1) == 1
                 ?
-                ((BitmapDrawable) getDrawable(R.drawable.coin1)).getBitmap()
+                ((BitmapDrawable) Objects.requireNonNull(getDrawable(R.drawable.coin1))).getBitmap()
                 :
-                ((BitmapDrawable) getDrawable(R.drawable.coin2)).getBitmap());
+                ((BitmapDrawable) Objects.requireNonNull(getDrawable(R.drawable.coin2))).getBitmap());
 
         animation(result, "coinFlip");
     }
@@ -273,8 +269,10 @@ public class SecondaryActivity extends AppCompatActivity {
     String lang = "English";
     public void getLetter(View view) {
         TextView result = findViewById(R.id.result);
+
         String letter = Randomness.getLetter(lang);
         result.setText(letter);
+
         animation(result, "flip");
 
         TextView history = findViewById(R.id.history);
@@ -289,25 +287,24 @@ public class SecondaryActivity extends AppCompatActivity {
     }
 
     public void getRoshambo(View view) {
-        ImageView result = findViewById(R.id.result);
-
         Bitmap bitmap;
 
         switch (Randomness.getRandom(1,3)) {
             case 1:
-                bitmap = ((BitmapDrawable) getDrawable(R.drawable.rock)).getBitmap();
+                bitmap = ((BitmapDrawable) Objects.requireNonNull(getDrawable(R.drawable.rock))).getBitmap();
                 break;
             case 2:
-                bitmap = ((BitmapDrawable) getDrawable(R.drawable.scissors)).getBitmap();
+                bitmap = ((BitmapDrawable) Objects.requireNonNull(getDrawable(R.drawable.scissors))).getBitmap();
                 break;
             case 3:
-                bitmap = ((BitmapDrawable) getDrawable(R.drawable.paper)).getBitmap();
+                bitmap = ((BitmapDrawable) Objects.requireNonNull(getDrawable(R.drawable.paper))).getBitmap();
                 break;
             default:
                 Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
                 return;
         }
 
+        ImageView result = findViewById(R.id.result);
         result.setImageBitmap(bitmap);
         animation(result, "zoom");
     }
@@ -316,6 +313,7 @@ public class SecondaryActivity extends AppCompatActivity {
     public void getCube(View view) {
         ImageView result = findViewById(R.id.result);
 
+        //казалось бы зачем повотрять, но без этого первое нажатие не работае
         dices.setLevel(0);
         result.setImageDrawable(dices.getCurrent());
 

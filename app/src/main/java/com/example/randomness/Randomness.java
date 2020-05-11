@@ -2,7 +2,7 @@ package com.example.randomness;
 
 import java.util.Random;
 
-public class Randomness {
+class Randomness {
     private static Random rand = new Random();
 
     static int getRandom(int min, int max) {
@@ -16,12 +16,17 @@ public class Randomness {
 
     private static String[] alphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
             "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "z", "x", "y", "z"};
+
     private static String[] alphabetUP = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
             "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "Z", "X", "Y", "Z"};
-    private static String[] special = {"#", "*", "!", "?", ".", ":", "^", "$", "(", ")", "-", "_", "=", "+", "@", "+", "<", ">"};
-    private static String[] numbers = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};//чтобы потом не приводить к строке
 
-    public static String getPassword(int length, boolean[] settings) {
+    private static String[] special = {"#", "*", "!", "?", ".", ":", "^", "$", "(", ")", "-",
+            "_", "=", "+", "@", "+", "<", ">"};
+
+    //чтобы потом не приводить к строке. Мне так удобней
+    private static String[] numbers = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+
+    static String getPassword(int length, boolean[] settings) {
         int len = 0;
         for(boolean item : settings) {
             len += item ? 1 : 0;
@@ -62,7 +67,7 @@ public class Randomness {
         return str.toString();
     }
 
-    public static String getLetter(String lang) {
+    static String getLetter(String lang) {
         switch (lang) {
             case "English":
                 return String.valueOf((char)getRandom(65, 90));
